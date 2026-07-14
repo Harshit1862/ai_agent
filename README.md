@@ -15,3 +15,12 @@
   answer. Hit and resolved a real API issue: Gemini's newer "thinking" models require 
   `thought_signature` to be preserved and replayed exactly when re-sending function-call 
   history — solved by reusing the original response part object instead of rebuilding it.
+
+- **Task 5**: Multi-tool agent with a real reasoning loop. Model dynamically chooses 
+  between 2 tools across multiple turns based on results, using dynamic function 
+  dispatch (`available_functions` dict) instead of if/elif chains. Added `max_turns` 
+  safety limit.
+- **Task 6**: Error handling and retry logic. Added exponential backoff for transient 
+  API failures, and safe tool execution that catches exceptions (bad arguments, missing 
+  data, unexpected errors) and feeds clean error messages back into the agent's 
+  reasoning loop instead of crashing.
